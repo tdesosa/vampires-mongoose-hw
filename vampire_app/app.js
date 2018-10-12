@@ -164,16 +164,56 @@ mongoose.connection.on('error', () => {
 
 // 5) Have greater than 150 AND fewer than 500 victims
 
-Vampire.find({$and: [{victims: {$gt: 150}}, {victims: {$lt: 500}}]}, (err, queryDisplay) => {
+// Vampire.find({$and: [{victims: {$gt: 150}}, {victims: {$lt: 500}}]}, (err, queryDisplay) => {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(queryDisplay)
+//     }
+// });
+
+/////////////////////////////////////////////////
+// ### Select by exists or does not exist
+
+// 1) Have a title property
+
+// Vampire.find({title: {$exists: true}}, (err, queryDisplay) => {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(queryDisplay)
+//     }
+// });
+
+// 2) Do not have a victims property
+
+// Vampire.find({victims: {$exists: false}}, (err, queryDisplay) => {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(queryDisplay)
+//     }
+// });
+
+// 3) Have a title AND no victims
+
+// Vampire.find({$and: [{title: {$exists: true}}, {victims: {$exists: false}}]}, (err, queryDisplay) => {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(queryDisplay)
+//     }
+// });
+
+// 4) Have victims AND the victims they have are greater than 1000
+
+Vampire.find({$and: [{victims: {$exists: true}}, {victims: {$gt: 1000}}]}, (err, queryDisplay) => {
     if(err){
         console.log(err);
     } else {
         console.log(queryDisplay)
     }
 });
-
-/////////////////////////////////////////////////
-// ### Select by exists or does not exist
 
 /////////////////////////////////////////////////
 // ### Select with OR
