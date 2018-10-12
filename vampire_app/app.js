@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 // 2. Require your model (and possibly your extra data source);
 const Vampire = require('./models/vampire');
+const vampireArray = require('./populateVampires');
 
 
 // 3. Connect your database and collection name
@@ -32,8 +33,89 @@ mongoose.connection.on('error', () => {
 /////////////////////////////////////////////////
 // INSERT USING MONGOOSE
 // ### Add the vampire data that we gave you
+Vampire.collection.insertMany(vampireArray,() => {
+    console.log(vampireArray)
+    mongoose.connection.close();
+  });
 
 // ### Add some new vampire data
+
+Vampire.create(
+    {
+        name: 'Vamp One',
+        hair_color: 'brown',
+        eye_color: 'brown',
+        dob: new Date(1970, 2, 13, 7, 47),
+        loves: ['popcorn','peanuts'],
+        location: 'Miami, Florida, US',
+        gender: 'm',
+        victims: 4,
+    }, 
+    (err, createdVamp) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log(createdVamp);
+        }
+});
+
+Vampire.create(
+    {
+        name: 'Vamp Two',
+        hair_color: 'black',
+        eye_color: 'blue',
+        dob: new Date(1969, 2, 15, 7, 47),
+        loves: ['soup','pizza'],
+        location: 'New York, New York, US',
+        gender: 'f',
+        victims: 5,
+    }, 
+    (err, createdVamp) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log(createdVamp);
+        }
+});
+
+Vampire.create(
+    {
+        name: 'Vamp Three',
+        hair_color: 'blonde',
+        eye_color: 'brown',
+        dob: new Date(1991, 3, 15, 7, 47),
+        loves: ['basketball','soccer'],
+        location: 'Denver, Colorado, US',
+        gender: 'm',
+        victims: 1,
+    }, 
+    (err, createdVamp) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log(createdVamp);
+        }
+});
+
+Vampire.create(
+    {
+        name: 'Vamp Four',
+        hair_color: 'black',
+        eye_color: 'brown',
+        dob: new Date(1990, 3, 10, 7, 47),
+        loves: ['reading','running'],
+        location: 'Denver, Colorado, US',
+        gender: 'f',
+        victims: 1,
+    }, 
+    (err, createdVamp) => {
+        if(err){
+            console.log(err);
+        } else {
+            console.log(createdVamp);
+        }
+});
+
 
 /////////////////////////////////////////////////
 // ## QUERYING
