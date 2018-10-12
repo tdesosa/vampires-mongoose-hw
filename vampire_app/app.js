@@ -33,94 +33,144 @@ mongoose.connection.on('error', () => {
 /////////////////////////////////////////////////
 // INSERT USING MONGOOSE
 // ### Add the vampire data that we gave you
-Vampire.collection.insertMany(vampireArray,() => {
-    console.log(vampireArray)
-    mongoose.connection.close();
-  });
+// Vampire.collection.insertMany(vampireArray,() => {
+//     console.log(vampireArray)
+//     mongoose.connection.close();
+//   });
 
 // ### Add some new vampire data
 
-Vampire.create(
-    {
-        name: 'Vamp One',
-        hair_color: 'brown',
-        eye_color: 'brown',
-        dob: new Date(1970, 2, 13, 7, 47),
-        loves: ['popcorn','peanuts'],
-        location: 'Miami, Florida, US',
-        gender: 'm',
-        victims: 4,
-    }, 
-    (err, createdVamp) => {
-        if(err){
-            console.log(err);
-        } else {
-            console.log(createdVamp);
-        }
-});
+// Vampire.create(
+//     {
+//         name: 'Vamp One',
+//         hair_color: 'brown',
+//         eye_color: 'brown',
+//         dob: new Date(1970, 2, 13, 7, 47),
+//         loves: ['popcorn','peanuts'],
+//         location: 'Miami, Florida, US',
+//         gender: 'm',
+//         victims: 4,
+//     }, 
+//     (err, createdVamp) => {
+//         if(err){
+//             console.log(err);
+//         } else {
+//             console.log(createdVamp);
+//         }
+// });
 
-Vampire.create(
-    {
-        name: 'Vamp Two',
-        hair_color: 'black',
-        eye_color: 'blue',
-        dob: new Date(1969, 2, 15, 7, 47),
-        loves: ['soup','pizza'],
-        location: 'New York, New York, US',
-        gender: 'f',
-        victims: 5,
-    }, 
-    (err, createdVamp) => {
-        if(err){
-            console.log(err);
-        } else {
-            console.log(createdVamp);
-        }
-});
+// Vampire.create(
+//     {
+//         name: 'Vamp Two',
+//         hair_color: 'black',
+//         eye_color: 'blue',
+//         dob: new Date(1969, 2, 15, 7, 47),
+//         loves: ['soup','pizza'],
+//         location: 'New York, New York, US',
+//         gender: 'f',
+//         victims: 5,
+//     }, 
+//     (err, createdVamp) => {
+//         if(err){
+//             console.log(err);
+//         } else {
+//             console.log(createdVamp);
+//         }
+// });
 
-Vampire.create(
-    {
-        name: 'Vamp Three',
-        hair_color: 'blonde',
-        eye_color: 'brown',
-        dob: new Date(1991, 3, 15, 7, 47),
-        loves: ['basketball','soccer'],
-        location: 'Denver, Colorado, US',
-        gender: 'm',
-        victims: 1,
-    }, 
-    (err, createdVamp) => {
-        if(err){
-            console.log(err);
-        } else {
-            console.log(createdVamp);
-        }
-});
+// Vampire.create(
+//     {
+//         name: 'Vamp Three',
+//         hair_color: 'blonde',
+//         eye_color: 'brown',
+//         dob: new Date(1991, 3, 15, 7, 47),
+//         loves: ['basketball','soccer'],
+//         location: 'Denver, Colorado, US',
+//         gender: 'm',
+//         victims: 1,
+//     }, 
+//     (err, createdVamp) => {
+//         if(err){
+//             console.log(err);
+//         } else {
+//             console.log(createdVamp);
+//         }
+// });
 
-Vampire.create(
-    {
-        name: 'Vamp Four',
-        hair_color: 'black',
-        eye_color: 'brown',
-        dob: new Date(1990, 3, 10, 7, 47),
-        loves: ['reading','running'],
-        location: 'Denver, Colorado, US',
-        gender: 'f',
-        victims: 1,
-    }, 
-    (err, createdVamp) => {
-        if(err){
-            console.log(err);
-        } else {
-            console.log(createdVamp);
-        }
-});
+// Vampire.create(
+//     {
+//         name: 'Vamp Four',
+//         hair_color: 'black',
+//         eye_color: 'brown',
+//         dob: new Date(1990, 3, 10, 7, 47),
+//         loves: ['reading','running'],
+//         location: 'Denver, Colorado, US',
+//         gender: 'f',
+//         victims: 1,
+//     }, 
+//     (err, createdVamp) => {
+//         if(err){
+//             console.log(err);
+//         } else {
+//             console.log(createdVamp);
+//         }
+// });
 
 
 /////////////////////////////////////////////////
 // ## QUERYING
 /////////////////////////////////////////////////
 // ### Select by comparison
+
+// 1) Find all the vampires that that are females
+
+// Vampire.find({gender: 'f'}, (err, queryDisplay) => {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(queryDisplay);
+//     }
+// });
+
+// 2) Have greater than 500 victims
+
+// Vampire.find({victims: {$gt: 500}}, (err, queryDisplay) => {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(queryDisplay)
+//     }
+// });
+
+// 3) Have fewer than or equal to 150 victims
+
+// Vampire.find({victims: {$lte: 150}}, (err, queryDisplay) => {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(queryDisplay)
+//     }
+// });
+
+// 4) Have a victim count is not equal to 210234
+
+// Vampire.find({victims: {$ne: 210234}}, (err, queryDisplay) => {
+//     if(err){
+//         console.log(err);
+//     } else {
+//         console.log(queryDisplay)
+//     }
+// });
+
+// 5) Have greater than 150 AND fewer than 500 victims
+
+Vampire.find({$and: [{victims: {$gt: 150}}, {victims: {$lt: 500}}]}, (err, queryDisplay) => {
+    if(err){
+        console.log(err);
+    } else {
+        console.log(queryDisplay)
+    }
+});
 
 /////////////////////////////////////////////////
 // ### Select by exists or does not exist
